@@ -994,114 +994,134 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   Dobra 6 — JORNADA DO PRÉ-NATAL TIMELINE (#jornada)
+   Dobra 6 — JORNADA DO PRÉ-NATAL — CARDS (#jornada)
    ========================================================================== */
 
-/* ── Desktop: linha horizontal com progresso animado ── */
 .jornada-timeline {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
   position: relative;
   margin-top: 48px;
+  align-items: start;
 }
 
-/* Trilho de fundo (cinza) */
+/* Trilho horizontal de fundo */
 .jornada-timeline::before {
   content: '';
   position: absolute;
-  top: 39px;
+  top: 36px;
   left: calc(10% + 1px);
   width: calc(80% - 2px);
-  height: 3px;
+  height: 2px;
   background: var(--color-border);
-  z-index: 1;
+  z-index: 0;
   border-radius: 2px;
 }
 
-/* Barra de progresso que cresce conforme steps ficam visíveis */
+/* Barra de progresso animada */
 .jornada-timeline::after {
   content: '';
   position: absolute;
-  top: 39px;
+  top: 36px;
   left: calc(10% + 1px);
   width: 0%;
-  height: 3px;
+  height: 2px;
   background: var(--color-primary);
-  z-index: 2;
+  z-index: 1;
   border-radius: 2px;
-  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Larguras conforme quantos steps estão visíveis */
+.jornada-timeline[data-visible="0"]::after { width: 0%; }
 .jornada-timeline[data-visible="1"]::after { width: 0%; }
 .jornada-timeline[data-visible="2"]::after { width: 20%; }
 .jornada-timeline[data-visible="3"]::after { width: 40%; }
 .jornada-timeline[data-visible="4"]::after { width: 60%; }
 .jornada-timeline[data-visible="5"]::after { width: 80%; }
 
+/* ── Card individual ── */
 .jornada-step {
   position: relative;
-  z-index: 3;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  background: var(--color-bg-main);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 20px 28px;
+  gap: 0;
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.3s ease;
+  cursor: default;
 }
 
+.jornada-step:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--color-primary);
+}
+
+/* Card ativo (visível no scroll) */
+.jornada-step.is-visible {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Número do step — badge acima do card ── */
 .jornada-step-number {
-  width: 80px;
-  height: 80px;
+  width: 52px;
+  height: 52px;
   border-radius: var(--radius-full);
   background: var(--color-bg-alt);
-  border: 4px solid var(--color-border);
+  border: 2px solid var(--color-border);
   color: var(--color-text-muted);
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.6rem;
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px auto;
-  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
   transition:
-    background 0.4s ease,
-    border-color 0.4s ease,
-    color 0.4s ease,
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    background 0.45s ease,
+    border-color 0.45s ease,
+    color 0.45s ease,
+    box-shadow 0.45s ease;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3;
 }
 
-/* Círculo ativo quando o step está visível */
 .jornada-step.is-visible .jornada-step-number {
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: #fff;
-  box-shadow: 0 0 0 6px var(--color-primary-light);
-}
-
-.jornada-step:hover .jornada-step-number {
-  transform: scale(1.1);
+  box-shadow: 0 0 0 5px var(--color-primary-light);
 }
 
 .jornada-step-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 800;
-  margin-bottom: 8px;
-  transition: color 0.4s ease;
-}
-
-.jornada-step.is-visible .jornada-step-title {
-  color: var(--color-primary-dark);
+  margin-bottom: 10px;
+  color: var(--color-text-main);
+  line-height: 1.3;
 }
 
 .jornada-step-desc {
-  font-size: 0.875rem;
+  font-size: 0.83rem;
   color: var(--color-text-muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
-/* ── Animação entrada desktop: fade + sobe ── */
+/* ── Animação: fade + sobe ── */
 .jornada-animate {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(28px) scale(0.97);
   transition:
     opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms),
     transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms);
@@ -1109,64 +1129,54 @@ h1, h2, h3, h4, h5, h6 {
 
 .jornada-animate.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
-/* ── Mobile: coluna vertical com linha lateral ── */
+/* ── Mobile: coluna única com linha lateral ── */
 @media (max-width: 992px) {
   .jornada-timeline {
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: 12px;
   }
 
-  /* Trilho vertical */
-  .jornada-timeline::before {
-    top: 40px;
-    left: 39px;
-    width: 3px;
-    height: calc(100% - 40px);
-    border-radius: 2px;
-  }
-
-  /* Progresso vertical */
+  /* Ocultar linha no mobile — cards empilhados são suficientes */
+  .jornada-timeline::before,
   .jornada-timeline::after {
-    top: 40px;
-    left: 39px;
-    width: 3px;
-    height: 0%;
-    transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    display: none;
   }
-
-  .jornada-timeline[data-visible="1"]::after { width: 3px; height: 0%; }
-  .jornada-timeline[data-visible="2"]::after { width: 3px; height: 20%; }
-  .jornada-timeline[data-visible="3"]::after { width: 3px; height: 40%; }
-  .jornada-timeline[data-visible="4"]::after { width: 3px; height: 60%; }
-  .jornada-timeline[data-visible="5"]::after { width: 3px; height: 80%; }
 
   .jornada-step {
-    display: flex;
-    gap: 20px;
+    flex-direction: row;
     text-align: left;
-    padding: 16px 0;
+    align-items: flex-start;
+    padding: 22px 20px;
+    gap: 16px;
   }
 
   .jornada-step-number {
-    margin: 0;
+    margin-bottom: 0;
     flex-shrink: 0;
-    width: 80px;
-    height: 80px;
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
   }
 
-  /* Mobile: cada step entra da esquerda */
+  .jornada-step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Mobile: cada card entra da esquerda */
   .jornada-animate {
     opacity: 0;
-    transform: translateX(-32px);
-    --delay: 0ms; /* cada step observado individualmente no mobile */
+    transform: translateX(-24px) scale(0.98);
+    --delay: 0ms;
   }
 
   .jornada-animate.is-visible {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
   }
 }
 
