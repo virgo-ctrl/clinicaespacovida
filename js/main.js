@@ -87,4 +87,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 300);
     }
   }
+
+  // 5. Scroll-triggered animation para .jornada-animate
+  const animatedEls = document.querySelectorAll('.jornada-animate');
+  if (animatedEls.length > 0 && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    animatedEls.forEach(el => observer.observe(el));
+  } else {
+    animatedEls.forEach(el => el.classList.add('is-visible'));
+  }
 });
