@@ -999,102 +999,141 @@ h1, h2, h3, h4, h5, h6 {
 
 .jornada-section {
   background: #fbfaf7;
+  padding: 120px 48px 140px;
+  box-sizing: border-box;
 }
 
+/* Desktop: 2 colunas — sticky text | card stack */
 .jornada-inner {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1160px;
   margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 540px;
+  gap: 80px;
+  align-items: start;
 }
 
-.jornada-header {
-  width: 100%;
-  max-width: 500px;
+/* Coluna esquerda sticky */
+.jornada-sticky {
+  position: sticky;
+  top: 120px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding-bottom: 24px;
-  text-align: left;
+  gap: 26px;
+  padding-top: 24px;
 }
 
 .jornada-eyebrow {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #f0501e;
+  line-height: 1;
 }
 
 .jornada-title {
   margin: 0;
-  font-size: clamp(28px, 5vw, 40px);
+  font-size: clamp(36px, 5vw, 64px);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
   color: #0b3b28;
+  text-wrap: balance;
+}
+
+.jornada-subtitle {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.6;
+  color: #5c6b64;
+  max-width: 34ch;
   text-wrap: pretty;
 }
 
-/* Stack de cards sobrepostos */
-.jornada-stack {
-  width: 100%;
-  max-width: 500px;
-  padding-bottom: 100px;
+.jornada-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 10px;
 }
 
-/* Wrapper de cada card: overflow:hidden para que a splash não vaze */
+.jornada-badge-line {
+  width: 44px;
+  height: 2px;
+  background: #0a6b45;
+  display: block;
+  flex-shrink: 0;
+}
+
+.jornada-badge-text {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9aa8a1;
+  line-height: 1;
+}
+
+/* Coluna direita: stack de cards */
+.jornada-stack {
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+/* Wrapper de cada card */
 .splash-card {
   overflow: hidden;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
-  padding-top: 20px;
-  margin-bottom: -120px; /* sobreposição — NÃO REMOVER */
+  padding: 48px 0 120px;
+  margin-bottom: -190px; /* sobreposição desktop */
 }
 
-/* Splash colorida atrás do card */
-.splash-bg {
+/* SVG splash de fundo */
+.splash-svg {
   position: absolute;
   inset: 0;
-  clip-path: path('M 0 303.5 C 0 292.454 8.995 285.101 20 283.5 L 460 219.5 C 470.085 218.033 480 228.454 480 239.5 L 500 430 C 500 441.046 491.046 450 480 450 L 20 450 C 8.954 450 0 441.046 0 430 Z');
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-/* O card branco em si */
+/* O card branco em si — desktop */
 .splash-inner {
-  width: 300px;
-  height: 376px;
+  width: 420px;
+  height: 390px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 30px 32px;
+  gap: 28px;
+  padding: 38px 40px;
   box-sizing: border-box;
-  border-radius: 24px;
+  border-radius: 28px;
   background: #ffffff;
   box-shadow:
     0 0 1px hsl(0deg 0% 0% / .075),
     0 0 2px hsl(0deg 0% 0% / .075),
     0 0 4px hsl(0deg 0% 0% / .075),
     0 0 8px hsl(0deg 0% 0% / .075),
-    0 0 16px hsl(0deg 0% 0% / .075);
+    0 0 24px hsl(0deg 0% 0% / .08);
   transform-origin: 10% 60%;
   transform: translateY(300px);
   transition: transform .8s cubic-bezier(.34, 1.56, .64, 1);
   will-change: transform;
+  position: relative;
+  z-index: 1;
 }
 
-/* Estado animado (visível) */
+/* Estado visível */
 .splash-inner.is-onscreen {
   transform: translateY(50px) rotate(-10deg);
 }
 
-/* Prefers-reduced-motion: sem animação, cards em posição final */
 @media (prefers-reduced-motion: reduce) {
   .splash-inner {
     transition: none;
@@ -1104,15 +1143,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Número */
 .splash-number {
-  width: 72px;
-  height: 72px;
+  width: 84px;
+  height: 84px;
   flex: none;
   border-radius: 999px;
   border: 3px solid #0a6b45;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 700;
   line-height: 1;
 }
@@ -1121,37 +1160,38 @@ h1, h2, h3, h4, h5, h6 {
 .splash-body {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .splash-step-title {
   margin: 0;
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
   color: #0b3b28;
   text-wrap: balance;
 }
 
 .splash-step-desc {
   margin: 0;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.5;
   color: #5c6b64;
   text-wrap: pretty;
 }
 
-/* Rodapé: traço + label */
+/* Rodapé */
 .splash-footer {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #9aa8a1;
+  line-height: 1;
 }
 
 .splash-dash {
@@ -1162,18 +1202,79 @@ h1, h2, h3, h4, h5, h6 {
   flex-shrink: 0;
 }
 
-/* Mobile: stack em coluna centralizada, sem sobreposição excessiva */
-@media (max-width: 600px) {
+/* ── Mobile ── */
+@media (max-width: 900px) {
+  .jornada-section {
+    padding: 80px 20px 100px;
+  }
+
+  .jornada-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .jornada-sticky {
+    position: static;
+    padding-top: 0;
+    gap: 14px;
+    padding-bottom: 24px;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .jornada-subtitle {
+    display: none; /* mobile: sem subtítulo, igual à referência */
+  }
+
+  .jornada-badge {
+    display: none;
+  }
+
+  .jornada-title {
+    font-size: 40px;
+    letter-spacing: -0.02em;
+  }
+
+  .jornada-stack {
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Mobile: dimensões e sobreposição da referência */
+  .splash-card {
+    padding: 44px 0 100px;
+    margin-bottom: -170px;
+  }
+
   .splash-inner {
-    width: 280px;
-    height: 356px;
-    padding: 24px 24px;
+    width: 300px;
+    height: 376px;
+    padding: 30px 32px;
+    gap: 0;
+    justify-content: space-between;
+    border-radius: 24px;
   }
+
+  .splash-number {
+    width: 72px;
+    height: 72px;
+    font-size: 32px;
+  }
+
   .splash-step-title {
-    font-size: 24px;
+    font-size: 30px;
+    letter-spacing: -0.02em;
   }
+
   .splash-step-desc {
-    font-size: 15px;
+    font-size: 17px;
+  }
+
+  .splash-footer {
+    font-size: 13px;
+    letter-spacing: 0.06em;
   }
 }
 
