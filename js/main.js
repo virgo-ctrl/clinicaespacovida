@@ -88,22 +88,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 5. Scroll-triggered animation para .jornada-animate
+  // 5. Scroll-triggered animation para .jornada-animate + progresso da linha
+  const timeline = document.querySelector('.jornada-timeline');
   const animatedEls = document.querySelectorAll('.jornada-animate');
+
   if (animatedEls.length > 0 && 'IntersectionObserver' in window) {
+    let visibleCount = 0;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
+            visibleCount++;
+            if (timeline) {
+              timeline.setAttribute('data-visible', String(visibleCount));
+            }
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.3, rootMargin: '0px 0px -40px 0px' }
     );
+
     animatedEls.forEach(el => observer.observe(el));
   } else {
+    // Fallback sem IntersectionObserver
     animatedEls.forEach(el => el.classList.add('is-visible'));
+    if (timeline) timeline.setAttribute('data-visible', '5');
   }
 });
