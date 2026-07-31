@@ -325,6 +325,44 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 20px;
     right: 20px;
   }
+
+  /* Nav mobile: logo menor + gap menor para não cortar */
+  .navbar {
+    height: 68px;
+    gap: 8px;
+  }
+  .nav-brand img {
+    height: 36px;
+  }
+  .nav-info {
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .nav-location {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+    gap: 4px;
+  }
+  .nav-location svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+  .btn-sm {
+    padding: 8px 14px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  /* Bento card dark: garantir que texto não transborde */
+  .bento-card {
+    padding: 24px 20px;
+    overflow: hidden;
+    word-break: break-word;
+  }
+  .bento-card p {
+    overflow-wrap: break-word;
+  }
 }
 
 /* ==========================================================================
@@ -1038,6 +1076,34 @@ h1, h2, h3, h4, h5, h6 {
   .jornada-step-number {
     margin: 0;
     flex-shrink: 0;
+  }
+}
+
+/* ==========================================================================
+   Jornada — Scroll-triggered card animation
+   ========================================================================== */
+.jornada-animate {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms);
+}
+
+.jornada-animate.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* No mobile os steps entram pela esquerda em vez de baixo */
+@media (max-width: 992px) {
+  .jornada-animate {
+    transform: translateX(-40px);
+    /* reset delay on mobile so each step triggers individually */
+    --delay: 0ms;
+  }
+  .jornada-animate.is-visible {
+    transform: translateX(0);
   }
 }
 
