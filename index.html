@@ -443,54 +443,96 @@
   </section>
 
   <!-- DOBRA 6 — JORNADA DO PRÉ-NATAL (#jornada) -->
-  <section id="jornada" class="section-padding" style="background: var(--color-bg-alt);">
-    <div class="container">
-      <div class="section-header">
-        <span class="badge badge-gold">Passo a Passo</span>
-        <h2>Como funciona o acompanhamento, do início ao parto</h2>
-        <p>Um caminho estruturado para você se sentir apoiada e segura durante toda a gestação.</p>
+  <section id="jornada" class="section-padding jornada-section">
+    <div class="jornada-inner">
+
+      <div class="jornada-header">
+        <span class="jornada-eyebrow">Seu acompanhamento</span>
+        <h2 class="jornada-title">Da primeira consulta ao pós-parto</h2>
       </div>
 
-      <div class="jornada-timeline" data-visible="0">
-        <div class="jornada-step jornada-animate" style="--delay:0ms">
-          <div class="jornada-step-number">1</div>
-          <div class="jornada-step-content">
-            <div class="jornada-step-title">Primeira Consulta</div>
-            <div class="jornada-step-desc">Avaliação completa do histórico e definição do plano de pré-natal.</div>
+      <div class="jornada-stack">
+
+        <!-- Card 1 -->
+        <div class="splash-card" data-splash-card>
+          <div class="splash-bg" style="background: linear-gradient(306deg, hsl(162, 62%, 32%), hsl(148, 70%, 46%))"></div>
+          <div class="splash-inner" data-splash-inner>
+            <div class="splash-number" style="background:#fff;color:#0a6b45">1</div>
+            <div class="splash-body">
+              <h3 class="splash-step-title">Primeira Consulta</h3>
+              <p class="splash-step-desc">Avaliação completa do histórico e definição do plano de pré-natal.</p>
+            </div>
+            <div class="splash-footer">
+              <span class="splash-dash"></span>
+              <span class="splash-label">Etapa 1 de 5</span>
+            </div>
           </div>
         </div>
 
-        <div class="jornada-step jornada-animate" style="--delay:120ms">
-          <div class="jornada-step-number">2</div>
-          <div class="jornada-step-content">
-            <div class="jornada-step-title">Acompanhamento</div>
-            <div class="jornada-step-desc">Consultas regulares e exames em cada trimestre.</div>
+        <!-- Card 2 -->
+        <div class="splash-card" data-splash-card>
+          <div class="splash-bg" style="background: linear-gradient(306deg, hsl(172, 62%, 32%), hsl(156, 70%, 46%))"></div>
+          <div class="splash-inner" data-splash-inner>
+            <div class="splash-number" style="background:#fff;color:#0a6b45">2</div>
+            <div class="splash-body">
+              <h3 class="splash-step-title">Acompanhamento</h3>
+              <p class="splash-step-desc">Consultas regulares e exames em cada trimestre.</p>
+            </div>
+            <div class="splash-footer">
+              <span class="splash-dash"></span>
+              <span class="splash-label">Etapa 2 de 5</span>
+            </div>
           </div>
         </div>
 
-        <div class="jornada-step jornada-animate" style="--delay:240ms">
-          <div class="jornada-step-number">3</div>
-          <div class="jornada-step-content">
-            <div class="jornada-step-title">Reta Final</div>
-            <div class="jornada-step-desc">Preparação para o parto e alinhamento do plano de parto.</div>
+        <!-- Card 3 -->
+        <div class="splash-card" data-splash-card>
+          <div class="splash-bg" style="background: linear-gradient(306deg, hsl(150, 62%, 32%), hsl(96, 70%, 46%))"></div>
+          <div class="splash-inner" data-splash-inner>
+            <div class="splash-number" style="background:#fff;color:#0a6b45">3</div>
+            <div class="splash-body">
+              <h3 class="splash-step-title">Reta Final</h3>
+              <p class="splash-step-desc">Preparação para o parto e alinhamento do plano de parto.</p>
+            </div>
+            <div class="splash-footer">
+              <span class="splash-dash"></span>
+              <span class="splash-label">Etapa 3 de 5</span>
+            </div>
           </div>
         </div>
 
-        <div class="jornada-step jornada-animate" style="--delay:360ms">
-          <div class="jornada-step-number">4</div>
-          <div class="jornada-step-content">
-            <div class="jornada-step-title">O Parto</div>
-            <div class="jornada-step-desc">Equipe médica presente e conhecida ao seu lado.</div>
+        <!-- Card 4 — laranja (destaque) -->
+        <div class="splash-card" data-splash-card>
+          <div class="splash-bg" style="background: linear-gradient(306deg, #c93a12, #f0501e)"></div>
+          <div class="splash-inner" data-splash-inner>
+            <div class="splash-number" style="background:#fff;color:#f0501e">4</div>
+            <div class="splash-body">
+              <h3 class="splash-step-title">O Parto</h3>
+              <p class="splash-step-desc">Equipe médica presente e conhecida ao seu lado.</p>
+            </div>
+            <div class="splash-footer">
+              <span class="splash-dash"></span>
+              <span class="splash-label">Etapa 4 de 5</span>
+            </div>
           </div>
         </div>
 
-        <div class="jornada-step jornada-animate" style="--delay:480ms">
-          <div class="jornada-step-number">5</div>
-          <div class="jornada-step-content">
-            <div class="jornada-step-title">Pós-Parto</div>
-            <div class="jornada-step-desc">Consultas de retorno e orientação segura no puerpério.</div>
+        <!-- Card 5 — número preenchido verde -->
+        <div class="splash-card" data-splash-card>
+          <div class="splash-bg" style="background: linear-gradient(306deg, hsl(160, 62%, 32%), hsl(140, 70%, 46%))"></div>
+          <div class="splash-inner" data-splash-inner>
+            <div class="splash-number" style="background:#0a6b45;color:#fff">5</div>
+            <div class="splash-body">
+              <h3 class="splash-step-title">Pós-Parto</h3>
+              <p class="splash-step-desc">Consultas de retorno e orientação segura no puerpério.</p>
+            </div>
+            <div class="splash-footer">
+              <span class="splash-dash"></span>
+              <span class="splash-label">Etapa 5 de 5</span>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>

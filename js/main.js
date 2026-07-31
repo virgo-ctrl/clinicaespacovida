@@ -88,33 +88,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 5. Scroll-triggered animation para .jornada-animate + progresso da linha
-  const timeline = document.querySelector('.jornada-timeline');
-  const animatedEls = document.querySelectorAll('.jornada-animate');
+  // 5. Splash cards — scroll-triggered com IntersectionObserver (fiel à referência)
+  const splashCards = Array.from(document.querySelectorAll('[data-splash-card]'));
 
-  if (animatedEls.length > 0 && 'IntersectionObserver' in window) {
-    let visibleCount = 0;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            visibleCount++;
-            if (timeline) {
-              timeline.setAttribute('data-visible', String(visibleCount));
+  if (splashCards.length > 0 && 'IntersectionObserver' in window) {
+    // Respeitar prefers-reduced-motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced) {
+      const splashObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const inner = entry.target.querySelector('[data-splash-inner]');
+            if (!inner) return;
+            if (entry.intersectionRatio >= 0.8) {
+              inner.classList.add('is-onscreen');
+            } else {
+              inner.classList.remove('is-onscreen');
             }
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: '0px 0px -40px 0px' }
-    );
-
-    animatedEls.forEach(el => observer.observe(el));
+          });
+        },
+        { threshold: [0, 0.2, 0.5, 0.8, 1] }
+      );
+      splashCards.forEach((c) => splashObserver.observe(c));
+    } else {
+      // Sem animação: mostrar todos na posição final imediatamente
+      splashCards.forEach((c) => {
+        const inner = c.querySelector('[data-splash-inner]');
+        if (inner) inner.classList.add('is-onscreen');
+      });
+    }
   } else {
-    // Fallback sem IntersectionObserver
-    animatedEls.forEach(el => el.classList.add('is-visible'));
-    if (timeline) timeline.setAttribute('data-visible', '5');
+    // Fallback: sem suporte a IntersectionObserver
+    splashCards.forEach((c) => {
+      const inner = c.querySelector('[data-splash-inner]');
+      if (inner) inner.classList.add('is-onscreen');
+    });
   }
 });
