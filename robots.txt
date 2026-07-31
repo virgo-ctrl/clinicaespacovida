@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.clinicaespacovidacaruaru.com.br/sitemap.xml
