@@ -911,6 +911,14 @@ h1, h2, h3, h4, h5, h6 {
   gap: 32px;
 }
 
+/* Variante com apenas 2 médicos — centralizada, colunas mais largas */
+.equipe-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 380px));
+  max-width: 800px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
 .medico-card {
   background-color: var(--color-bg-alt);
   border-radius: var(--radius-xl);
@@ -990,6 +998,11 @@ h1, h2, h3, h4, h5, h6 {
   .equipe-grid {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .equipe-grid-2 {
+    grid-template-columns: 1fr;
+    max-width: 420px;
   }
 }
 
